@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milo × Strive High ABA — Solution Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #FFFFFF;
+  --bg-soft: #f8fbff;
+  --bg-card: rgba(46, 163, 242, 0.06);
+  --border: rgba(46, 163, 242, 0.15);
+  --border-light: rgba(0, 0, 0, 0.07);
+  --accent: #2ea3f2;
+  --accent-dim: rgba(46, 163, 242, 0.1);
+  --accent-dark: #1a8ad4;
+  --purple: #7B5CF6;
+  --purple-dim: rgba(123, 92, 246, 0.08);
+  --purple-border: rgba(123, 92, 246, 0.2);
+  --gold: #f5a623;
+  --text: #333333;
+  --text-body: #555555;
+  --text-muted: #888888;
+  --font: 'Open Sans', -apple-system, sans-serif;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle ambient background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 20% 20%, rgba(46, 163, 242, 0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 80%, rgba(46, 163, 242, 0.03) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 50%, rgba(123, 92, 246, 0.015) 0%, transparent 40%);
+}
+
+/* Layout */
+.page { max-width: 860px; margin: 0 auto; padding: 0 48px; }
+
+/* Section spacing */
+.section { padding: 64px 0; }
+.section + .section { border-top: 1px solid var(--border-light); }
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  max-width: 860px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border-light);
+  opacity: 0;
+  animation: fadeUp 0.7s ease forwards;
+}
+
+.topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-brand img { height: 32px; }
+
+.topbar-x {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.topbar-meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.topbar-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.topbar-date {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Strive High logo placeholder */
+.sh-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sh-logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.sh-logo-text {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+/* Milo logo group */
+.milo-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.milo-logo-group span {
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple);
+}
+
+/* Hero */
+.hero {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+h1 {
+  font-weight: 700;
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+
+h1 .em { color: var(--accent); }
+
+.hero-lead {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  max-width: 640px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+/* Section headings */
+.section-label {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.section-lead {
+  font-size: 0.98rem;
+  color: var(--text-body);
+  max-width: 620px;
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+/* CTA buttons */
+.cta-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: box-shadow 0.3s, transform 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.01em;
+  min-width: 200px;
+  text-align: center;
+}
+
+.cta-btn:hover {
+  box-shadow: 0 0 24px rgba(46, 163, 242, 0.35);
+  transform: translateY(-1px);
+  background: var(--accent-dark);
+}
+
+.cta-btn.glow-pulse {
+  animation: glowPulse 0.5s ease-out;
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 20px rgba(46, 163, 242, 0.5), 0 0 40px rgba(123, 92, 246, 0.2); }
+  100% { box-shadow: 0 0 0px rgba(46, 163, 242, 0); }
+}
+
+.cta-btn .char {
+  display: inline-block;
+  transition: transform 0.15s ease;
+  white-space: pre;
+}
+
+.cta-btn .char.land {
+  animation: charLand 0.2s ease-out;
+}
+
+.cta-btn .char.flash {
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(245, 166, 35, 0.6);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+@keyframes charLand {
+  0% { transform: scaleY(1.3) scaleX(0.9); }
+  50% { transform: scaleY(0.85) scaleX(1.1); }
+  100% { transform: scaleY(1) scaleX(1); }
+}
+
+.cta-secondary {
+  display: inline-block;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.3s, color 0.3s;
+  text-align: center;
+}
+
+.cta-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.cta-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-cta {
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Problem section */
+.problem-prose p {
+  font-size: 1rem;
+  color: var(--text-body);
+  line-height: 1.8;
+  margin-bottom: 20px;
+  max-width: 680px;
+}
+
+.problem-prose p:last-child {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Chat example */
+.chat-container {
+  background: var(--bg-soft);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 24px;
+}
+
+.chat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.chat-message {
+  padding: 24px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.chat-message + .chat-message {
+  border-top: 1px solid var(--border-light);
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: #fff;
+}
+
+.chat-avatar.user { background: var(--accent); }
+.chat-avatar.milo { background: var(--purple); }
+
+.chat-sender {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.chat-text {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text-body);
+}
+
+/* Stack section */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+  margin-bottom: 20px;
+}
+
+.stack-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: border-color 0.2s;
+}
+
+.stack-item:hover {
+  border-color: var(--accent);
+}
+
+.stack-icon {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.stack-item h4 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.stack-item p {
+  font-size: 0.82rem;
+  color: var(--text-body);
+  line-height: 1.5;
+}
+
+.hipaa-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding: 14px 18px;
+  background: rgba(46, 163, 242, 0.04);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  margin-top: 8px;
+}
+
+/* Proof section */
+.proof-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: border-color 0.3s;
+}
+
+.proof-card:hover { border-color: rgba(46, 163, 242, 0.4); }
+
+.proof-card p {
+  font-size: 0.95rem;
+  color: var(--text-body);
+  line-height: 1.75;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.proof-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.proof-ref {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.stat-cell {
+  background: var(--bg);
+  padding: 18px 16px;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Counter animation */
+.stat-num[data-count] {
+  opacity: 0;
+}
+
+.stat-num[data-count].counted {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Pricing */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.price-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: border-color 0.3s;
+}
+
+.price-card:hover { border-color: var(--accent); }
+
+.price-card.featured {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, rgba(46, 163, 242, 0.08), rgba(46, 163, 242, 0.02));
+}
+
+.price-tier {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.price-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.price-period {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.price-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.price-card ul li {
+  font-size: 0.85rem;
+  color: var(--text-body);
+  padding: 5px 0;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.price-card ul li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+/* Divider */
+.section-divider {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.divider-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 0 20px;
+  position: relative;
+}
+
+/* Q&A */
+.qa-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.qa-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: border-color 0.3s;
+}
+
+.qa-card:hover { border-color: var(--accent); }
+
+.qa-card h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.qa-card p {
+  font-size: 0.88rem;
+  color: var(--text-body);
+  line-height: 1.7;
+}
+
+/* Timeline */
+.timeline {
+  margin-top: 24px;
+}
+
+.tl-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  background: var(--bg-card);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: border-color 0.3s;
+}
+
+.tl-step:hover { border-color: var(--accent); }
+
+.tl-days {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-top: 2px;
+}
+
+.tl-step h4 {
+  display: none;
+}
+
+.tl-step p {
+  font-size: 0.88rem;
+  color: var(--text-body);
+  line-height: 1.65;
+}
+
+/* Final CTA */
+.final-cta {
+  padding: 64px 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.final-cta-inner {
+  background: linear-gradient(135deg, rgba(46, 163, 242, 0.07), rgba(46, 163, 242, 0.02));
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 48px 40px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.final-cta-inner h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  margin-bottom: 10px;
+}
+
+.final-cta-inner p {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  margin-bottom: 28px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 28px 0;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  border-top: 1px solid var(--border-light);
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Fade-in animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-target {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.animate-target.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+/* Print */
+@media print {
+  body::before { display: none; }
+  .page, .topbar { padding-left: 24px; padding-right: 24px; }
+  .section { padding: 32px 0; }
+  * { opacity: 1 !important; transform: none !important; animation: none !important; transition: none !important; }
+  @page { size: A4; margin: 0; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .topbar { padding: 20px 24px; flex-direction: column; gap: 10px; align-items: flex-start; }
+  .page { padding: 0 24px; }
+  .stack-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .stats-strip { grid-template-columns: 1fr; }
+  .tl-step { grid-template-columns: 1fr; }
+  .tl-days { margin-bottom: -8px; }
+  .cta-row { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="sh-logo">
+      <div class="sh-logo-icon">SH</div>
+      <span class="sh-logo-text">Strive High ABA</span>
+    </div>
+    <span class="topbar-x">&times;</span>
+    <div class="milo-logo-group">
+      <img src="data:image/jpeg;base64,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" alt="Milo" style="height:32px; border-radius:5px;" />
+      <span>Milo</span>
+    </div>
+  </div>
+  <div class="topbar-meta">
+    <span class="topbar-tag">Solution Overview</span>
+    <span class="topbar-date">March 2026</span>
+  </div>
+</div>
+
+<div class="page">
+
+<!-- ═══ SECTION 1: HOOK ═══ -->
+<section class="hero">
+  <h1 class="animate-target">
+    Your team has the data.<br>
+    <span class="em">They just can't get to it without asking.</span>
+  </h1>
+
+  <p class="hero-lead animate-target">
+    Strive High runs a complex operation — billing cycles that don't align with calendar weeks, cash flow that lags revenue by three weeks, and KPIs that need to be tracked across EMR and payroll systems. Milo connects to your existing data and lets your team ask questions in plain English — utilization rates, supervision percentages, CPT code breakdowns — without waiting for a report.
+  </p>
+
+  <div class="hero-cta animate-target">
+    <a href="https://meetings-eu1.hubspot.com/tpickett" class="cta-btn slot-btn" target="_blank">Book the Pilot</a>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: PROBLEM WORTH SOLVING ═══ -->
+<section class="section">
+  <span class="section-label animate-target">The challenge</span>
+  <h2 class="animate-target">The problem worth solving</h2>
+
+  <div class="problem-prose animate-target">
+    <p>You're moving away from Microsoft Dynamics and the Power BI dashboards that came with it. Your new EMR and RCM systems have the data — every billing code, every session, every authorization — but no simple way for your team to explore it. The backend reports exist. The columns are there. What's missing is the layer that turns that data into answers.</p>
+
+    <p>Every time someone needs a utilization breakdown, a supervision consistency check, or a week-over-week comparison that accounts for your Thursday-to-Wednesday billing cycle, it becomes a manual exercise. That's time your team doesn't have.</p>
+
+    <p>Milo closes that gap. Ask in plain English. Get the answer in seconds. No report request. No waiting.</p>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: EXAMPLE QUERY ═══ -->
+<section class="section">
+  <span class="section-label animate-target">What this looks like</span>
+  <h2 class="animate-target">What this looks like for Strive High's team</h2>
+
+  <div class="chat-container animate-target">
+    <div class="chat-label">Live example</div>
+
+    <div class="chat-message">
+      <div class="chat-avatar user">CD</div>
+      <div>
+        <div class="chat-sender">Clinical Director</div>
+        <div class="chat-text">Show me utilization rates by BCBA for the last 4 billing weeks, and flag anyone whose supervision percentage is below the 5% threshold.</div>
+      </div>
+    </div>
+
+    <div class="chat-message">
+      <div class="chat-avatar milo">M</div>
+      <div>
+        <div class="chat-sender">Milo</div>
+        <div class="chat-text">Across your 4 most recent billing weeks (Thu–Wed cycles), average BCBA utilization is 78.3%. Three BCBAs are above 85%: Dr. Martinez (91%), Sarah Kim (88%), and James Liu (86%). Two are flagged for supervision: Rachel Adams is at 3.8% (below the 5% minimum for 3 consecutive weeks) and Tom Chen is at 4.2% (trending down from 6.1% last month). CPT 97155 supervision hours are concentrated on Mondays and Fridays — want me to break down the scheduling pattern or pull the authorization status for Rachel's caseload?</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: WORKS WITH YOUR STACK ═══ -->
+<section class="section">
+  <span class="section-label animate-target">Integration</span>
+  <h2 class="animate-target">Connects to what you already have</h2>
+  <p class="section-lead animate-target">Start with your EMR exports. Add payroll when ready. No disruption to what's already working.</p>
+
+  <div class="stack-grid">
+    <div class="stack-item animate-target">
+      <div class="stack-icon">&#10003;</div>
+      <h4>EMR System</h4>
+      <p>Direct connection to clinical and billing data</p>
+    </div>
+    <div class="stack-item animate-target">
+      <div class="stack-icon">&#10003;</div>
+      <h4>RCM Platform</h4>
+      <p>Revenue cycle, claims, and authorization tracking</p>
+    </div>
+    <div class="stack-item animate-target">
+      <div class="stack-icon">&#10003;</div>
+      <h4>Payroll System</h4>
+      <p>Staff costs, hours, and scheduling data</p>
+    </div>
+  </div>
+
+  <div class="hipaa-note animate-target">
+    All data processing is HIPAA-compliant. BAA executed before any data transfer. Your data is encrypted in transit and at rest.
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: PROOF POINT ═══ -->
+<section class="section">
+  <span class="section-label animate-target">Track record</span>
+  <h2 class="animate-target">Already trusted in regulated industries</h2>
+
+  <div class="proof-card animate-target">
+    <p>Live gaming platform operating across multiple regulated markets with strict compliance requirements. Real-time transaction data, performance tracking, and revenue analytics across regions. Cut report turnaround from 3 days to 3 minutes. Operations team now runs their own analyses without analyst involvement.</p>
+    <div class="proof-label">BetGames &middot; Regulated Industry</div>
+    <div class="proof-ref">Reference call available on request.</div>
+  </div>
+
+  <div class="stats-strip animate-target">
+    <div class="stat-cell">
+      <span class="stat-num" data-count="3" data-suffix=" minutes, not days">3 minutes, not days</span>
+      <span class="stat-label">report turnaround</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num" data-count="0" data-suffix=" analyst hours on ad-hoc">0 analyst hours on ad-hoc</span>
+      <span class="stat-label">manual work eliminated</span>
+    </div>
+    <div class="stat-cell">
+      <span class="stat-num" data-count="100" data-suffix="% team self-serve">100% team self-serve</span>
+      <span class="stat-label">adoption rate</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: PRICING ═══ -->
+<section class="section">
+  <span class="section-label animate-target">Investment</span>
+  <h2 class="animate-target">What a pilot looks like</h2>
+
+  <div class="pricing-grid">
+    <div class="price-card animate-target">
+      <div class="price-tier">POC — 3 weeks</div>
+      <div class="price-amount">$1,000</div>
+      <div class="price-period">one-time</div>
+      <ul>
+        <li>EMR data connected</li>
+        <li>Team full access</li>
+        <li>$1,000 credited against first month if you proceed</li>
+      </ul>
+    </div>
+    <div class="price-card featured animate-target">
+      <div class="price-tier">Full licence</div>
+      <div class="price-amount">$1,600</div>
+      <div class="price-period">per month</div>
+      <ul>
+        <li>Unlimited users and interactions</li>
+        <li>Additional data source connections when ready</li>
+        <li>Automated weekly CEO reporting included</li>
+        <li>HIPAA compliant — BAA included</li>
+        <li>Excel export with underlying queries</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:28px;" class="animate-target">
+    <a href="https://meetings-eu1.hubspot.com/tpickett" class="cta-btn slot-btn" target="_blank">Book the Pilot</a>
+  </div>
+</section>
+
+<!-- ═══ DIVIDER ═══ -->
+<div class="section-divider">
+  <span class="divider-text">For your internal discussion</span>
+</div>
+
+<!-- ═══ SECTION 7: Q&A ═══ -->
+<section class="section" style="border-top:none;">
+  <span class="section-label animate-target">FAQ</span>
+  <h2 class="animate-target">Questions for the team</h2>
+
+  <div class="qa-grid">
+    <div class="qa-card animate-target">
+      <h4>Is this HIPAA compliant?</h4>
+      <p>Yes. We execute a Business Associate Agreement before any data transfer. Data is encrypted in transit and at rest, processed in SOC 2 certified infrastructure, and never used to train AI models. Full compliance documentation available on request.</p>
+    </div>
+
+    <div class="qa-card animate-target">
+      <h4>We were looking at Power BI or Tableau. Why not just go with those?</h4>
+      <p>Power BI and Tableau are excellent for pre-built dashboards — and you may still want them for certain views. But they require someone to build every report before anyone can use it. When your clinical director needs a quick utilization check mid-meeting, or your CEO wants a cash flow projection that accounts for billing week lag, those tools can't answer on the fly. Milo handles the questions that come up between dashboards.</p>
+    </div>
+
+    <div class="qa-card animate-target">
+      <h4>What about our billing week structure? Thursday to Wednesday doesn't work in most tools.</h4>
+      <p>Milo's knowledge base is configured with your specific definitions during setup — including your Thursday-to-Wednesday billing week, your KPI formulas, your CPT code mappings. When someone asks about "last week," Milo knows that means Thursday to Wednesday, not Sunday to Saturday.</p>
+    </div>
+
+    <div class="qa-card animate-target">
+      <h4>How long does setup take?</h4>
+      <p>For your EMR data: typically 2–3 days from credentials to first queries. The 3-week POC starts there so you get value immediately. Payroll and additional sources are connected in parallel during the pilot.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 8: TIMELINE ═══ -->
+<section class="section">
+  <span class="section-label animate-target">Timeline</span>
+  <h2 class="animate-target">Three weeks. Real data. Real answers.</h2>
+
+  <div class="timeline">
+    <div class="tl-step animate-target">
+      <div class="tl-days">Days 1–3</div>
+      <div>
+        <p>Connect EMR data. Team onboarded. Knowledge base configured with your billing week structure, KPI definitions, and CPT code mappings.</p>
+      </div>
+    </div>
+    <div class="tl-step animate-target">
+      <div class="tl-days">Days 4–10</div>
+      <div>
+        <p>First analyses running. Utilization tracking, supervision monitoring, week-over-week comparisons live.</p>
+      </div>
+    </div>
+    <div class="tl-step animate-target">
+      <div class="tl-days">Days 11–17</div>
+      <div>
+        <p>Automated reporting set up — weekly CEO summary, supervision compliance alerts, cash flow projections.</p>
+      </div>
+    </div>
+    <div class="tl-step animate-target">
+      <div class="tl-days">Days 18–21</div>
+      <div>
+        <p>Review session with your team. Additional data sources scoped. Decision on full licence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 9: FINAL CTA ═══ -->
+<div class="final-cta">
+  <div class="final-cta-inner animate-target">
+    <h2>Ready when you are.</h2>
+    <p>If it'd help to have us on a call with your team before the pilot starts, we're happy to do that.</p>
+    <div class="cta-row">
+      <a href="https://meetings-eu1.hubspot.com/tpickett" class="cta-btn slot-btn" target="_blank">Book the Pilot</a>
+      <a href="mailto:tom@usemilo.ai" class="cta-secondary">Email Tom</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<!-- Footer -->
+<div class="footer">
+  <a href="https://usemilo.ai" target="_blank">usemilo.ai</a> &nbsp;&middot;&nbsp; HIPAA Compliant &nbsp;&middot;&nbsp; BAA Available
+</div>
+
+<script>
+// Slot machine reel effect for CTA buttons
+(function() {
+  const SLOT_CHARS = '\u2665+\u2605\u25CF\u25B2HRx';
+  const ORIGINAL_TEXT = 'Book the Pilot';
+  const CYCLE_DURATION = 600;
+  const CYCLE_INTERVAL = 40;
+  const LAND_STAGGER = 30;
+
+  function initSlotButton(btn) {
+    let isAnimating = false;
+
+    function setChars(text) {
+      btn.innerHTML = '';
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = text[i];
+        btn.appendChild(span);
+      }
+    }
+
+    setChars(ORIGINAL_TEXT);
+
+    function randomChar() {
+      return SLOT_CHARS[Math.floor(Math.random() * SLOT_CHARS.length)];
+    }
+
+    function runSpin(callback) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const chars = btn.querySelectorAll('.char');
+      const len = ORIGINAL_TEXT.length;
+
+      const cycleTimer = setInterval(() => {
+        for (let i = 0; i < len; i++) {
+          if (ORIGINAL_TEXT[i] === ' ') continue;
+          chars[i].textContent = randomChar();
+        }
+      }, CYCLE_INTERVAL);
+
+      setTimeout(() => {
+        clearInterval(cycleTimer);
+
+        for (let i = 0; i < len; i++) {
+          ((idx) => {
+            setTimeout(() => {
+              chars[idx].textContent = ORIGINAL_TEXT[idx];
+              chars[idx].classList.add('land', 'flash');
+
+              setTimeout(() => {
+                chars[idx].classList.remove('flash');
+              }, 200);
+
+              setTimeout(() => {
+                chars[idx].classList.remove('land');
+              }, 200);
+
+              if (idx === len - 1) {
+                btn.classList.add('glow-pulse');
+                setTimeout(() => {
+                  btn.classList.remove('glow-pulse');
+                  isAnimating = false;
+                  if (callback) callback();
+                }, 500);
+              }
+            }, idx * LAND_STAGGER);
+          })(i);
+        }
+      }, CYCLE_DURATION);
+    }
+
+    btn.addEventListener('mouseenter', () => {
+      runSpin();
+    });
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = btn.getAttribute('href');
+
+      if (isAnimating) {
+        const checkDone = setInterval(() => {
+          if (!isAnimating) {
+            clearInterval(checkDone);
+            window.open(href, '_blank');
+          }
+        }, 50);
+        return;
+      }
+
+      runSpin(() => {
+        window.open(href, '_blank');
+      });
+    });
+  }
+
+  document.querySelectorAll('.slot-btn').forEach(initSlotButton);
+
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-target').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Stat counter animation
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+        entry.target.classList.add('counted');
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+    statObserver.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
